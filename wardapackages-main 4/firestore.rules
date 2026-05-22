@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function isAdminEmail() { return isSignedIn() && request.auth.token.email == 'aounshah211@gmail.com' && request.auth.token.email_verified == true; }
+    
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    function isValidProduct(data) {
+      return data.keys().hasAll(['title', 'subtitle', 'image']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.subtitle is string && data.subtitle.size() <= 200 &&
+             data.image is string && data.image.size() <= 1000 &&
+             data.get('category', '') is string && data.get('category', '').size() <= 100 &&
+             data.get('btnText', '') is string && data.get('btnText', '').size() <= 100 &&
+             data.get('price', 0) is number;
+    }
+
+    function isValidSetting(data) {
+      return data.keys().hasAll(['value']) &&
+             data.value is string && data.value.size() <= 5000;
+    }
+
+    function isValidAdmin(data) {
+      return data.keys().hasAll(['email']) &&
+             data.email is string && data.email.size() <= 200 &&
+             data.get('name', '') is string && data.get('name', '').size() <= 200;
+    }
+
+    function isValidOrder(data) {
+      return data.keys().hasAll(['customerName', 'address', 'phone', 'total', 'status', 'items']) &&
+             data.customerName is string && data.customerName.size() <= 200 &&
+             data.address is string && data.address.size() <= 1000 &&
+             data.phone is string && data.phone.size() <= 50 &&
+             data.status is string && data.status.size() <= 50 &&
+             data.total is number &&
+             data.items is list && data.items.size() <= 100 &&
+             data.get('paymentMethod', '') is string && data.get('paymentMethod', '').size() <= 100;
+    }
+
+    match /products/{productId} {
+      // Anyone can read products
+      allow get: if isValidId(productId);
+      allow list: if true;
+      allow create: if isValidId(productId) && isAdminEmail() && isValidProduct(incoming()) && incoming().keys().hasOnly(['title', 'subtitle', 'image', 'btnText', 'category', 'price']);
+      allow update: if isValidId(productId) && isAdminEmail() && isValidProduct(incoming()) && incoming().diff(existing()).affectedKeys().hasOnly(['title', 'subtitle', 'image', 'btnText', 'category', 'price']);
+      allow delete: if isValidId(productId) && isAdminEmail();
+    }
+
+    match /settings/{settingId} {
+      // Anyone can read settings
+      allow get: if isValidId(settingId);
+      allow list: if true;
+      allow create: if isValidId(settingId) && isAdminEmail() && isValidSetting(incoming()) && incoming().keys().hasOnly(['value']);
+      allow update: if isValidId(settingId) && isAdminEmail() && isValidSetting(incoming()) && incoming().diff(existing()).affectedKeys().hasOnly(['value']);
+      allow delete: if isValidId(settingId) && isAdminEmail();
+    }
+
+    match /admins/{adminId} {
+      allow get: if isValidId(adminId) && isAdminEmail();
+      allow list: if isAdminEmail();
+      allow create: if isValidId(adminId) && isAdminEmail() && isValidAdmin(incoming()) && incoming().keys().hasOnly(['email', 'name']);
+      allow update: if isValidId(adminId) && isAdminEmail() && isValidAdmin(incoming()) && incoming().diff(existing()).affectedKeys().hasOnly(['email', 'name']);
+      allow delete: if isValidId(adminId) && isAdminEmail();
+    }
+    match /orders/{orderId} {
+      // Anyone can create an order, but only admins can read or update it
+      allow create: if isValidId(orderId) && isValidOrder(incoming()) && incoming().keys().hasOnly(['customerName', 'address', 'phone', 'total', 'status', 'items', 'paymentMethod']);
+      allow get: if isValidId(orderId) && isAdminEmail();
+      allow list: if isAdminEmail();
+      allow update: if isValidId(orderId) && isAdminEmail() && isValidOrder(incoming()) && incoming().diff(existing()).affectedKeys().hasOnly(['status']);
+      allow delete: if isValidId(orderId) && isAdminEmail();
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Warda Packages",
+  "description": "Premium mosquito protection and organic insect repellent products for your health and comfort.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
