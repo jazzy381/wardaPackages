@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warda Packages — Protect Your Home Naturally</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        /* ========================================
+           RESET & BASE
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* ========================================
+           CSS VARIABLES — EASY TO CHANGE COLORS
+        ======================================== */
+        :root {
+            /* Main Purples */
+            --purple-900: #1A0A2E;
+            --purple-800: #2D1B4E;
+            --purple-700: #3D2466;
+            --purple-600: #5B3A8C;
+            --purple-500: #7B5EA7;
+            --purple-400: #9B7FC4;
+            --purple-300: #BFA6E0;
+            --purple-200: #DFD0F0;
+            --purple-100: #F0E8F8;
+
+            /* Accents */
+            --green-accent: #6BBF59;
+            --gold-accent: #D4A843;
+            --orange-accent: #E8943A;
+
+            /* Backgrounds */
+            --bg-dark: #1A0A2E;
+            --bg-card: #2D1B4E;
+            --bg-card-light: #FFFFFF;
+            --bg-section-alt: #231244;
+
+            /* Text */
+            --text-light: #FFFFFF;
+            --text-muted: #C9B8E8;
+            --text-dark: #2D1B4E;
+            --text-body: #6B5B8A;
+
+            /* Sizing */
+            --container-max: 1280px;
+            --nav-height: 80px;
+
+            /* Transitions */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        /* ========================================
+           UTILITY CLASSES
+        ======================================== */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flex-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        /* ========================================
+           SCROLLBAR
+        ======================================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--purple-900);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--purple-500);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--purple-400);
+        }
+
+        /* ========================================
+           ANIMATIONS
+        ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(123, 94, 167, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(123, 94, 167, 0.6); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           NAVBAR
+        ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            z-index: 1000;
+            background: rgba(26, 10, 46, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(123, 94, 167, 0.15);
+            transition: var(--transition-normal);
+        }
+
+        .navbar .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .nav-logo iconify-icon {
+            color: var(--green-accent);
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-light);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--green-accent);
+            border-radius: 1px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-icon-btn {
+            position: relative;
+            background: none;
+            color: var(--text-muted);
+            font-size: 22px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-icon-btn:hover {
+            color: var(--text-light);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--green-accent);
+            color: var(--purple-900);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            color: var(--text-light);
+            font-size: 28px;
+        }
+
+        /* Mobile Nav */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            width: 100%;
+            background: rgba(26, 10, 46, 0.98);
+            backdrop-filter: blur(16px);
+            padding: 24px;
+            z-index: 999;
+            border-bottom: 1px solid rgba(123, 94, 167, 0.2);
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 14px 0;
+            font-size: 16px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(123, 94, 167, 0.1);
+            transition: var(--transition-fast);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--text-light);
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            padding-top: var(--nav-height);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 50%, var(--purple-800) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(107, 191, 89, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(123, 94, 167, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(107, 191, 89, 0.15);
+            border: 1px solid rgba(107, 191, 89, 0.3);
+            color: var(--green-accent);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--green-accent);
+        }
+
+        .hero-description {
+            font-size: 17px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--green-accent);
+            color: var(--purple-900);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            transition: var(--transition-normal);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #5AB448;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(107, 191, 89, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid var(--purple-400);
+            transition: var(--transition-normal);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--purple-600);
+            border-color: var(--purple-400);
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 10px 24px;
+            font-size: 13px;
+        }
+
+        /* Hero Trust Badges */
+        .hero-trust {
+            display: flex;
+            gap: 32px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(107, 191, 89, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green-accent);
+            font-size: 18px;
+        }
+
+        .trust-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .trust-text strong {
+            display: block;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: relative;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .hero-image-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(26, 10, 46, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(107, 191, 89, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-image-badge iconify-icon {
+            color: var(--green-accent);
+            font-size: 24px;
+        }
+
+        .hero-image-badge span {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .hero-image-badge strong {
+            display: block;
+            font-size: 16px;
+            color: var(--green-accent);
+        }
+
+        /* ========================================
+           FEATURES SECTION
+        ======================================== */
+        .features {
+            background: var(--bg-section-alt);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--purple-500), transparent);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(45, 27, 78, 0.6);
+            border: 1px solid rgba(123, 94, 167, 0.15);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(107, 191, 89, 0.3);
+            background: rgba(45, 27, 78, 0.9);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(107, 191, 89, 0.15), rgba(107, 191, 89, 0.05));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--green-accent);
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-light);
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           PRODUCTS SECTION
+        ======================================== */
+        .products {
+            background: var(--bg-dark);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--green-accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background: var(--bg-card-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-normal);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-image {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.08);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--green-accent);
+            color: var(--purple-900);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 50px;
+        }
+
+        .product-wishlist {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--purple-700);
+            transition: var(--transition-fast);
+            cursor: pointer;
+            border: none;
+        }
+
+        .product-wishlist:hover {
+            background: var(--purple-700);
+            color: white;
+        }
+
+        .product-info {
+            padding: 22px;
+        }
+
+        .product-category {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--purple-400);
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .product-desc {
+            font-size: 13px;
+            color: var(--text-body);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--purple-700);
+        }
+
+        .product-price .old-price {
+            font-size: 14px;
+            font-weight: 400;
+            color: #aaa;
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .btn-add-cart {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--purple-700);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: var(--transition-normal);
+        }
+
+        .btn-add-cart:hover {
+            background: var(--green-accent);
+            color: var(--purple-900);
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+           BENEFITS SECTION
+        ======================================== */
+        .benefits {
+            background: var(--bg-section-alt);
+            position: relative;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 36px 24px;
+            border-radius: 20px;
+            background: rgba(45, 27, 78, 0.5);
+            border: 1px solid rgba(123, 94, 167, 0.12);
+            transition: var(--transition-normal);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(123, 94, 167, 0.3);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--purple-600), var(--purple-700));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--green-accent);
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .benefit-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           TESTIMONIALS
+        ======================================== */
+        .testimonials {
+            background: var(--bg-dark);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: rgba(45, 27, 78, 0.5);
+            border: 1px solid rgba(123, 94, 167, 0.12);
+            border-radius: 20px;
+            padding: 32px;
+            transition: var(--transition-normal);
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(107, 191, 89, 0.25);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-stars iconify-icon {
+            color: var(--gold-accent);
+            font-size: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .testimonial-role {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ========================================
+           NEWSLETTER
+        ======================================== */
+        .newsletter {
+            background: linear-gradient(135deg, var(--purple-700) 0%, var(--purple-800) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(107, 191, 89, 0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(123, 94, 167, 0.3);
+            background: rgba(26, 10, 46, 0.5);
+            color: var(--text-light);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition-fast);
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--purple-300);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--green-accent);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            background: var(--purple-900);
+            padding: 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(123, 94, 167, 0.12);
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin: 16px 0 20px;
+            max-width: 280px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(123, 94, 167, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+        }
+
+        .footer-social-icon:hover {
+            background: var(--green-accent);
+            color: var(--purple-900);
+        }
+
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 14px;
+            color: var(--text-muted);
+            padding: 6px 0;
+            transition: var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--green-accent);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-payments {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-payments iconify-icon {
+            font-size: 30px;
+            color: var(--purple-400);
+        }
+
+        /* ========================================
+           CART SIDEBAR
+        ======================================== */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-normal);
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            max-width: 90vw;
+            height: 100vh;
+            background: var(--purple-800);
+            z-index: 2001;
+            transform: translateX(100%);
+            transition: var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            border-bottom: 1px solid rgba(123, 94, 167, 0.15);
+        }
+
+        .cart-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--text-light);
+        }
+
+        .cart-close {
+            background: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            transition: var(--transition-fast);
+        }
+
+        .cart-close:hover {
+            color: var(--text-light);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .cart-empty iconify-icon {
+            font-size: 60px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(123, 94, 167, 0.1);
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--green-accent);
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(123, 94, 167, 0.2);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: var(--transition-fast);
+        }
+
+        .qty-btn:hover {
+            background: var(--purple-500);
+        }
+
+        .qty-num {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .cart-item-remove {
+            background: none;
+            color: var(--text-muted);
+            font-size: 16px;
+            align-self: flex-start;
+            transition: var(--transition-fast);
+        }
+
+        .cart-item-remove:hover {
+            color: #e74c3c;
+        }
+
+        .cart-footer {
+            padding: 24px;
+            border-top: 1px solid rgba(123, 94, 167, 0.15);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .cart-total span {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        .cart-total strong {
+            font-size: 22px;
+            color: var(--text-light);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            border-radius: 50px;
+            background: var(--green-accent);
+            color: var(--purple-900);
+            font-size: 15px;
+            font-weight: 700;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-checkout:hover {
+            background: #5AB448;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(107, 191, 89, 0.3);
+        }
+
+        /* ========================================
+           TOAST NOTIFICATION
+        ======================================== */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--purple-700);
+            border: 1px solid var(--green-accent);
+            color: var(--text-light);
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeInUp 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast iconify-icon {
+            color: var(--green-accent);
+            font-size: 20px;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin: 0 auto 36px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-trust {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero-image-wrapper img {
+                height: 400px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 30px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image-wrapper img {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         NAVBAR
+    ======================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="logo.png" alt="error"/ width="35px" height="35px">
+                <span id="siteName">Warda Packages</span>
+            </a>
+
+            <div class="nav-links" id="navLinks">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" title="Search">
+                    <iconify-icon icon="lucide:search"></iconify-icon>
+                </button>
+                <button class="nav-icon-btn" title="Wishlist">
+                    <iconify-icon icon="lucide:heart"></iconify-icon>
+                </button>
+                <button class="nav-icon-btn" id="cartToggle" title="Cart">
+                    <iconify-icon icon="lucide:shopping-bag"></iconify-icon>
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <iconify-icon icon="lucide:menu"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav"></div>
+
+    <!-- ========================================
+         HERO SECTION
+    ======================================== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge" id="heroBadge">
+                    <iconify-icon icon="lucide:leaf"></iconify-icon>
+                    <span>100% Natural Ingredients</span>
+                </div>
+
+                <h1 class="hero-title" id="heroTitle">
+                    Protect Your Home <span>Naturally</span>
+                </h1>
+
+                <p class="hero-description" id="heroDesc">
+                    Discover our curated collection of organic, eco-friendly home protection products. Safe for your family, gentle on the planet.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#products" class="btn-primary">
+                        Shop Now
+                        <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+                    </a>
+                    <a href="#benefits" class="btn-secondary">
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="hero-trust" id="heroTrust">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img id="heroImage" src=".jpg" alt="Natural Home Protection">
+                    <div class="hero-image-badge">
+                        <iconify-icon icon="lucide:shield-check"></iconify-icon>
+                        <span>Eco Certified<strong>100% Safe</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FEATURES SECTION
+    ======================================== -->
+    <section class="features section-padding" id="features">
+        <div class="container">
+            <div class="features-grid" id="featuresGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PRODUCTS SECTION
+    ======================================== -->
+    <section class="products section-padding" id="products">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Products</span>
+                <h2 class="section-title" id="productsTitle">Bestselling Essentials</h2>
+                <p class="section-subtitle" id="productsSubtitle">Handcrafted with the finest natural ingredients for your home and family.</p>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         BENEFITS SECTION
+    ======================================== -->
+    <section class="benefits section-padding" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Why Choose Us</span>
+                <h2 class="section-title">The NaturaGuard Difference</h2>
+                <p class="section-subtitle">Every product is backed by science and crafted with care.</p>
+            </div>
+
+            <div class="benefits-grid" id="benefitsGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS SECTION
+    ======================================== -->
+    <section class="testimonials section-padding" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">Loved by Families</h2>
+                <p class="section-subtitle">Hear from our happy customers who made the natural switch.</p>
+            </div>
+
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         NEWSLETTER SECTION
+    ======================================== -->
+    <section class="newsletter section-padding">
+        <div class="container">
+            <div class="newsletter-content">
+                <span class="section-label">Stay Updated</span>
+                <h2 class="section-title">Join the Natural Movement</h2>
+                <p class="section-subtitle" style="margin-bottom: 32px;">Get exclusive offers, tips, and new product alerts delivered to your inbox.</p>
+
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-primary">
+                        Subscribe
+                        <iconify-icon icon="lucide:send"></iconify-icon>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid" id="footerGrid">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="footer-bottom">
+                <p id="copyrightText"></p>
+                <div class="footer-payments">
+                    <iconify-icon icon="logos:visa"></iconify-icon>
+                    <iconify-icon icon="logos:mastercard"></iconify-icon>
+                    <iconify-icon icon="logos:paypal"></iconify-icon>
+                    <iconify-icon icon="logos:apple-pay"></iconify-icon>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         CART SIDEBAR
+    ======================================== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" id="cartClose">
+                <iconify-icon icon="lucide:x"></iconify-icon>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Populated by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="btn-checkout" onclick="handleCheckout()">
+                Checkout
+                <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- ========================================
+         TOAST CONTAINER
+    ======================================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+
+    <!-- ========================================
+         JAVASCRIPT — ALL DATA IS HERE FOR EASY MANAGEMENT
+    ======================================== -->
+    <script>
+    /* =============================================
+       SITE CONFIGURATION — EDIT HERE TO CHANGE ANYTHING
+       Just update the values below to customize your site!
+    ============================================= */
+
+    const SITE_CONFIG = {
+
+        /* --- Site Identity --- */
+        siteName: "NaturaGuard",
+        tagline: "Protect Your Home Naturally",
+
+        /* --- Navigation Links --- */
+        navLinks: [
+            { label: "Home", href: "#home", active: true },
+            { label: "Shop", href: "#products", active: false },
+            { label: "Features", href: "#features", active: false },
+            { label: "Benefits", href: "#benefits", active: false },
+            { label: "Reviews", href: "#testimonials", active: false },
+            { label: "Contact", href: "#footer", active: false }
+        ],
+
+        /* --- Hero Section --- */
+        hero: {
+            badge: "100% Natural Ingredients",
+            title: "Protect Your Home <span>Naturally</span>",
+            description: "Discover our curated collection of organic, eco-friendly home protection products. Safe for your family, gentle on the planet.",
+            image: "herosectionimage.png",
+            trustBadges: [
+                { icon: "lucide:shield-check", label: "Certified Organic", sublabel: "USDA Approved" },
+                { icon: "lucide:heart-pulse", label: "Holistic Wellness", sublabel: "Family Safe" },
+                { icon: "lucide:hand-heart", label: "Ethical Sourcing", sublabel: "Fair Trade" }
+            ]
+        },
+
+        /* --- Features Section --- */
+        features: [
+            {
+                icon: "lucide:leaf",
+                title: "Certified Organic",
+                description: "Every product is made from 100% certified organic ingredients, free from harmful chemicals and synthetics."
+            },
+            {
+                icon: "lucide:heart-pulse",
+                title: "Holistic Wellness",
+                description: "Our formulations are designed to nurture your body, mind, and home with the healing power of nature."
+            },
+            {
+                icon: "lucide:hand-heart",
+                title: "Ethical Sourcing",
+                description: "We partner with sustainable farms and cooperatives to ensure fair practices from seed to shelf."
+            }
+        ],
+
+        /* --- Products Section --- */
+        productsTitle: "Bestselling Essentials",
+        productsSubtitle: "Handcrafted with the finest natural ingredients for your home and family.",
+
+        products: [
+            {
+                id: 1,
+                name: "Natural Mosquito Coil",
+                category: "Outdoor Protection",
+                description: "Plant-based coils with citronella and lemongrass for effective, chemical-free mosquito protection.",
+                price: 14.99,
+                oldPrice: 19.99,
+                tag: "Bestseller",
+                image: "https://picsum.photos/seed/mosquito-coil-plant/400/300.jpg"
+            },
+            {
+                id: 2,
+                name: "Mosquito Repellent Lotion",
+                category: "Body Care",
+                description: "Gentle, DEET-free lotion enriched with neem and eucalyptus for all-day protection.",
+                price: 18.99,
+                oldPrice: 24.99,
+                tag: "New",
+                image: "https://picsum.photos/seed/lotion-bottle-nature/400/300.jpg"
+            },
+            {
+                id: 3,
+                name: "Luxury Spa Diffuser",
+                category: "Home Aromatherapy",
+                description: "Handcrafted ceramic diffuser with essential oil blends to purify and fragrance your space.",
+                price: 39.99,
+                oldPrice: 49.99,
+                tag: "Popular",
+                image: "https://picsum.photos/seed/spa-diffuser-luxury/400/300.jpg"
+            },
+            {
+                id: 4,
+                name: "Silken Skin Soap Bar",
+                category: "Bath & Body",
+                description: "Cold-pressed soap with shea butter, oatmeal, and lavender for silky smooth skin.",
+                price: 9.99,
+                oldPrice: 12.99,
+                tag: "Organic",
+                image: "https://picsum.photos/seed/handmade-soap-bar/400/300.jpg"
+            }
+        ],
+
+        /* --- Benefits Section --- */
+        benefits: [
+            {
+                icon: "lucide:microscope",
+                title: "Dermatologist Tested",
+                description: "Rigorously tested and approved by certified dermatologists for sensitive skin."
+            },
+            {
+                icon: "lucide:recycle",
+                title: "Eco-Friendly Packaging",
+                description: "100% recyclable and biodegradable packaging to minimize environmental impact."
+            },
+            {
+                icon: "lucide:ban",
+                title: "Cruelty Free",
+                description: "Never tested on animals. Leaping Bunny certified and PETA approved."
+            },
+            {
+                icon: "lucide:truck",
+                title: "Fast Delivery",
+                description: "Free shipping on orders over $35. Delivered within 2-5 business days nationwide."
+            }
+        ],
+
+        /* --- Testimonials --- */
+        testimonials: [
+            {
+                name: "Sarah Mitchell",
+                role: "Mom of 3",
+                avatar: "https://picsum.photos/seed/woman-sarah/80/80.jpg",
+                text: "Finally, a mosquito repellent I feel safe using around my kids! The natural coil works amazingly well and smells wonderful.",
+                stars: 5
+            },
+            {
+                name: "James Rodriguez",
+                role: "Yoga Instructor",
+                avatar: "https://picsum.photos/seed/man-james/80/80.jpg",
+                text: "The spa diffuser has transformed my meditation space. The essential oil blends are pure and the scent lasts for hours.",
+                stars: 5
+            },
+            {
+                name: "Emily Chen",
+                role: "Skin Care Enthusiast",
+                avatar: "https://picsum.photos/seed/woman-emily/80/80.jpg",
+                text: "The silken soap bar is my absolute favorite! My skin has never felt this smooth. Love that it's all natural and organic.",
+                stars: 5
+            }
+        ],
+
+        /* --- Footer --- */
+        footer: {
+            description: "NaturaGuard brings you the finest organic, eco-friendly home and body products. Safe for you, safe for the planet.",
+            socialLinks: [
+                { icon: "mdi:instagram", href: "#" },
+                { icon: "mdi:facebook", href: "#" },
+                { icon: "mdi:twitter", href: "#" },
+                { icon: "mdi:pinterest", href: "#" }
+            ],
+            columns: [
+                {
+                    title: "Shop",
+                    links: ["All Products", "Bestsellers", "New Arrivals", "Gift Sets", "Sale"]
+                },
+                {
+                    title: "Company",
+                    links: ["About Us", "Our Story", "Sustainability", "Careers", "Press"]
+                },
+                {
+                    title: "Support",
+                    links: ["Help Center", "Shipping Info", "Returns", "Track Order", "Contact Us"]
+                }
+            ]
+        }
+    };
+
+
+    /* =============================================
+       CART STATE
+    ============================================= */
+    let cart = [];
+
+
+    /* =============================================
+       RENDER FUNCTIONS
+    ============================================= */
+
+    /* --- Render Navigation --- */
+    function renderNav() {
+        const navLinksEl = document.getElementById("navLinks");
+        const mobileNavEl = document.getElementById("mobileNav");
+
+        navLinksEl.innerHTML = SITE_CONFIG.navLinks.map(link =>
+            `<a href="${link.href}" class="${link.active ? 'active' : ''}">${link.label}</a>`
+        ).join("");
+
+        mobileNavEl.innerHTML = SITE_CONFIG.navLinks.map(link =>
+            `<a href="${link.href}" onclick="closeMobileNav()">${link.label}</a>`
+        ).join("");
+    }
+
+    /* --- Render Hero --- */
+    function renderHero() {
+        const hero = SITE_CONFIG.hero;
+        document.getElementById("heroBadge").innerHTML =
+            `<iconify-icon icon="lucide:leaf"></iconify-icon><span>${hero.badge}</span>`;
+        document.getElementById("heroTitle").innerHTML = hero.title;
+        document.getElementById("heroDesc").textContent = hero.description;
+        document.getElementById("heroImage").src = hero.image;
+
+        document.getElementById("heroTrust").innerHTML = hero.trustBadges.map(badge => `
+            <div class="trust-item">
+                <div class="trust-icon">
+                    <iconify-icon icon="${badge.icon}"></iconify-icon>
+                </div>
+                <div class="trust-text">
+                    <strong>${badge.label}</strong>
+                    ${badge.sublabel}
+                </div>
+            </div>
+        `).join("");
+    }
+
+    /* --- Render Features --- */
+    function renderFeatures() {
+        document.getElementById("featuresGrid").innerHTML = SITE_CONFIG.features.map(f => `
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <iconify-icon icon="${f.icon}"></iconify-icon>
+                </div>
+                <h3 class="feature-title">${f.title}</h3>
+                <p class="feature-desc">${f.description}</p>
+            </div>
+        `).join("");
+    }
+
+    /* --- Render Products --- */
+    function renderProducts() {
+        document.getElementById("productsTitle").textContent = SITE_CONFIG.productsTitle;
+        document.getElementById("productsSubtitle").textContent = SITE_CONFIG.productsSubtitle;
+
+        document.getElementById("productsGrid").innerHTML = SITE_CONFIG.products.map(p => `
+            <div class="product-card animate-on-scroll">
+                <div class="product-image">
+                    <img src="${p.image}" alt="${p.name}" loading="lazy">
+                    <span class="product-tag">${p.tag}</span>
+                    <button class="product-wishlist" title="Add to Wishlist">
+                        <iconify-icon icon="lucide:heart"></iconify-icon>
+                    </button>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${p.category}</div>
+                    <h3 class="product-name">${p.name}</h3>
+                    <p class="product-desc">${p.description}</p>
+                    <div class="product-bottom">
+                        <div class="product-price">
+                            $${p.price.toFixed(2)}
+                            ${p.oldPrice ? `<span class="old-price">$${p.oldPrice.toFixed(2)}</span>` : ''}
+                        </div>
+                        <button class="btn-add-cart" onclick="addToCart(${p.id})" title="Add to Cart">
+                            <iconify-icon icon="lucide:plus"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    /* --- Render Benefits --- */
+    function renderBenefits() {
+        document.getElementById("benefitsGrid").innerHTML = SITE_CONFIG.benefits.map(b => `
+            <div class="benefit-card animate-on-scroll">
+                <div class="benefit-icon">
+                    <iconify-icon icon="${b.icon}"></iconify-icon>
+                </div>
+                <h3 class="benefit-title">${b.title}</h3>
+                <p class="benefit-desc">${b.description}</p>
+            </div>
+        `).join("");
+    }
+
+    /* --- Render Testimonials --- */
+    function renderTestimonials() {
+        document.getElementById("testimonialsGrid").innerHTML = SITE_CONFIG.testimonials.map(t => `
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-stars">
+                    ${Array(t.stars).fill('<iconify-icon icon="lucide:star"></iconify-icon>').join("")}
+                </div>
+                <p class="testimonial-text">"${t.text}"</p>
+                <div class="testimonial-author">
+                    <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
+                    <div>
+                        <div class="testimonial-name">${t.name}</div>
+                        <div class="testimonial-role">${t.role}</div>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    /* --- Render Footer --- */
+    function renderFooter() {
+        const f = SITE_CONFIG.footer;
+        document.getElementById("copyrightText").textContent =
+            `© ${new Date().getFullYear()} ${SITE_CONFIG.siteName}. All rights reserved.`;
+
+        document.getElementById("footerGrid").innerHTML = `
+            <div class="footer-brand">
+                <a href="#" class="nav-logo">
+                    <iconify-icon icon="fluent-emoji-flat:herb"></iconify-icon>
+                    <span>${SITE_CONFIG.siteName}</span>
+                </a>
+                <p>${f.description}</p>
+                <div class="footer-socials">
+                    ${f.socialLinks.map(s =>
+                        `<a href="${s.href}" class="footer-social-icon"><iconify-icon icon="${s.icon}"></iconify-icon></a>`
+                    ).join("")}
+                </div>
+            </div>
+            ${f.columns.map(col => `
+                <div>
+                    <h4 class="footer-title">${col.title}</h4>
+                    <div class="footer-links">
+                        ${col.links.map(link => `<a href="#">${link}</a>`).join("")}
+                    </div>
+                </div>
+            `).join("")}
+        `;
+    }
+
+
+    /* =============================================
+       CART FUNCTIONS
+    ============================================= */
+
+    function addToCart(productId) {
+        const product = SITE_CONFIG.products.find(p => p.id === productId);
+        if (!product) return;
+
+        const existingItem = cart.find(item => item.id === productId);
+        if (existingItem) {
+            existingItem.qty += 1;
+        } else {
+            cart.push({ ...product, qty: 1 });
+        }
+
+        updateCartUI();
+        showToast(`${product.name} added to cart!`);
+    }
+
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        updateCartUI();
+    }
+
+    function changeQty(productId, delta) {
+        const item = cart.find(i => i.id === productId);
+        if (!item) return;
+
+        item.qty += delta;
+        if (item.qty <= 0) {
+            removeFromCart(productId);
+            return;
+        }
+
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const badge = document.getElementById("cartBadge");
+        const cartItemsEl = document.getElementById("cartItems");
+        const cartTotalEl = document.getElementById("cartTotal");
+
+        const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+        badge.textContent = totalItems;
+
+        if (cart.length === 0) {
+            cartItemsEl.innerHTML = `
+                <div class="cart-empty">
+                    <iconify-icon icon="lucide:shopping-bag"></iconify-icon>
+                    <p>Your cart is empty</p>
+                </div>
+            `;
+        } else {
+            cartItemsEl.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="changeQty(${item.id}, -1)">
+                                <iconify-icon icon="lucide:minus"></iconify-icon>
+                            </button>
+                            <span class="qty-num">${item.qty}</span>
+                            <button class="qty-btn" onclick="changeQty(${item.id}, 1)">
+                                <iconify-icon icon="lucide:plus"></iconify-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <iconify-icon icon="lucide:trash-2"></iconify-icon>
+                    </button>
+                </div>
+            `).join("");
+        }
+
+        cartTotalEl.textContent = `$${totalPrice.toFixed(2)}`;
+    }
+
+
+    /* =============================================
+       CART SIDEBAR TOGGLE
+    ============================================= */
+
+    function openCart() {
+        document.getElementById("cartSidebar").classList.add("open");
+        document.getElementById("cartOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeCart() {
+        document.getElementById("cartSidebar").classList.remove("open");
+        document.getElementById("cartOverlay").classList.remove("open");
+        document.body.style.overflow = "";
+    }
+
+    document.getElementById("cartToggle").addEventListener("click", openCart);
+    document.getElementById("cartClose").addEventListener("click", closeCart);
+    document.getElementById("cartOverlay").addEventListener("click", closeCart);
+
+
+    /* =============================================
+       MOBILE NAV
+    ============================================= */
+
+    document.getElementById("mobileMenuBtn").addEventListener("click", function() {
+        document.getElementById("mobileNav").classList.toggle("open");
+    });
+
+    function closeMobileNav() {
+        document.getElementById("mobileNav").classList.remove("open");
+    }
+
+
+    /* =============================================
+       TOAST NOTIFICATIONS
+    ============================================= */
+
+    function showToast(message) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `
+            <iconify-icon icon="lucide:check-circle"></iconify-icon>
+            <span>${message}</span>
+        `;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateY(10px)";
+            toast.style.transition = "0.3s ease";
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+
+    /* =============================================
+       NEWSLETTER
+    ============================================= */
+
+    function handleNewsletter(e) {
+        e.preventDefault();
+        const input = e.target.querySelector("input");
+        showToast(`Subscribed with ${input.value}!`);
+        input.value = "";
+    }
+
+
+    /* =============================================
+       CHECKOUT
+    ============================================= */
+
+    function handleCheckout() {
+        if (cart.length === 0) {
+            showToast("Your cart is empty!");
+            return;
+        }
+        const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+        showToast(`Order placed! Total: $${total.toFixed(2)}`);
+        cart = [];
+        updateCartUI();
+        closeCart();
+    }
+
+
+    /* =============================================
+       SCROLL ANIMATIONS
+    ============================================= */
+
+    function initScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        document.querySelectorAll(".animate-on-scroll").forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+
+    /* =============================================
+       NAVBAR SCROLL EFFECT
+    ============================================= */
+
+    window.addEventListener("scroll", function() {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+            navbar.style.background = "rgba(26, 10, 46, 0.98)";
+            navbar.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.3)";
+        } else {
+            navbar.style.background = "rgba(26, 10, 46, 0.9)";
+            navbar.style.boxShadow = "none";
+        }
+    });
+
+
+    /* =============================================
+       INITIALIZE EVERYTHING
+    ============================================= */
+
+    function init() {
+        renderNav();
+        renderHero();
+        renderFeatures();
+        renderProducts();
+        renderBenefits();
+        renderTestimonials();
+        renderFooter();
+        updateCartUI();
+
+        // Delay scroll animation init so DOM is ready
+        setTimeout(initScrollAnimations, 100);
+    }
+
+    // Run on page load
+    document.addEventListener("DOMContentLoaded", init);
+    </script>
+
+</body>
+</html>
