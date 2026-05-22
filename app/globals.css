@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #ceaa6b;
+  --color-gold-hover: #b8975d;
+  --color-purple-cta: #7b5c92;
+  --color-purple-cta-hover: #6a4f7e;
+  --color-bg-dark: #4c1d95;
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-jakarta);
+}
+
+@layer utilities {
+  .bg-dots {
+    background-image: radial-gradient(rgba(206, 170, 107, 0.15) 2px, transparent 2px);
+    background-size: 24px 24px;
+  }
+}
